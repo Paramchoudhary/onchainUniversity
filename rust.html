@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Rust - Blockchain Course</title>
+    <link rel="stylesheet" href="rust-course.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><h2 id="header" >Rust Tutorial</h2></li>
+                <li><a href="#what-is-rust" class="nav-link" data-target="what-is-rust">What is Rust?</a></li>
+                <li><a href="#why-rust" class="nav-link" data-target="why-rust">Why Rust?</a></li>
+                <li><a href="#getting-started-with-rust" class="nav-link" data-target="getting-started-with-rust">Getting Started with Rust</a></li>
+                <li><a href="#functions-in-rust" class="nav-link" data-target="functions-in-rust">Functions in Rust</a></li>
+                <li><a href="#understanding-ownership" class="nav-link" data-target="understanding-ownership">Understanding Ownership</a></li>
+                <li><a href="#rust-control-flow" class="nav-link" data-target="rust-control-flow">Control Flow in Rust</a></li>
+                Add more sections as needed -->
+            <!-- </ul>
+        </nav>
+    </aside> -->
+  
+    <aside class="sidebar" id="sidebar">
+        <nav>
+            <ul>
+                <li><h2 id="header">Rust Tutorial</h2></li>
+                <li><a href="#rust-introduction" class="nav-link">Rust Introduction</a></li>
+                <li><a href="#rust-installation" class="nav-link">Rust Installation</a></li>
+                <li><a href="#hello-world" class="nav-link">Hello World</a></li>
+                <li><a href="#rust-primitives"class="nav-link">Data Types & Primitives</a></li>
+                <li><a href="#rust-control-flow"class="nav-link">Control Flow</a></li>
+                <li><a href="#rust-functions"class="nav-link">Functions</a></li>
+                <li><a href="#rust-ownership"class="nav-link">Ownership</a></li>
+                <li><a href="#rust-borrowing"class="nav-link">Borrowing & References</a></li>
+                <li><a href="#rust-structs"class="nav-link">Structs</a></li>
+                <li><a href="#rust-enums"class="nav-link">Enums</a></li>
+                <li><a href="#rust-modules"class="nav-link">Modules</a></li>
+                <li><a href="#rust-collections"class="nav-link">Collections</a></li>
+                <li><a href="#rust-error-handling"class="nav-link">Error Handling</a></li>
+                <li><a href="#rust-generic-types"class="nav-link">Generic Types, Traits, and Lifetimes</a></li>
+                <li><a href="#rust-tests"class="nav-link">Testing</a></li>
+                <li><a href="#rust-concurrency" class="nav-link">Concurrency</a></li>
+                <li><a href="#rust-cargo" class="nav-link">Cargo and Crates</a></li>
+                <li><a href="#rust-pattern-matching" class="nav-link">Pattern Matching</a></li>
+                <li><a href="#rust-advanced-features" class="nav-link">Advanced Features</a></li>
+                <li><a href="#rust-ffi" class="nav-link">FFI - Foreign Function Interface</a></li>
+                <li><a href="#rust-macros" class="nav-link">Macros</a></li>
+                <li><a href="#rust-async-await" class="nav-link">Async/Await</a></li>
+                <li><a href="#rust-web-development" class="nav-link">Web Development with Rust</a></li>
+                <li><a href="#rust-embedded" class="nav-link" >Embedded Rust</a></li>
+                <li><a href="#rust-cross-compilation" class="nav-link" >Cross Compilation</a></li>
+                <li><a href="#rust-performance-tuning" class="nav-link">Performance Tuning</a></li>
+             
+                <!-- Additional topics as needed -->
+            </ul>
+        </nav>
+    </aside>
+    
+    
+    <main class="content">
+
+        <section id="rust-introduction" class="content-section active">
+            <h2>Rust Introduction</h2>
+            <p>Rust is a modern systems programming language focused on safety, speed, and concurrency. It achieves these goals without a garbage collector, making it a useful language for a number of use cases, from embedded systems to web applications. Rust is designed to help developers create fast, secure applications that take advantage of the powerful features of modern multi-core processors.</p><br>
+        
+            <p>Rust offers several innovations in syntax and memory management. Its ownership system, for example, enables the compiler to ensure memory safety and thread safety simultaneously, preventing common bugs that plague systems programming, such as buffer overflows and data races.</p><br>
+        
+            <h3>Why Rust?</h3>
+            <p>Rust is often chosen by developers for its performance and safety, especially when developing systems that require high reliability and speed. Here are a few reasons why Rust is gaining popularity:</p>
+            <ul>
+                <li><strong>Memory Safety:</strong> Rust's ownership model guarantees that there are no null or dangling pointers, which eliminates a wide class of bugs at compile-time.</li>
+                <li><strong>Concurrency:</strong> Rust's type system and ownership model make it easier to build safe concurrent programs. The compiler guarantees that your program is free from data races.</li>
+                <li><strong>Performance:</strong> Rust is designed to be as fast as C and C++, but with a higher level of safety. It is a compiled language, meaning it's converted directly into machine code that the processor can execute.</li>
+                <li><strong>Tooling:</strong> Rust comes with Cargo, its package manager and build system, making it easy to manage dependencies, run tests, and package your applications.</li>
+                <li><strong>Vibrant Community:</strong> Despite being a relatively new language, Rust has a rapidly growing and active community. There's a wealth of resources, libraries, and tools available.</li>
+            </ul><br>
+        
+            
+   
+        </section>
+        
+        <section id="rust-installation" class="content-section">
+            <h2>Rust Installation</h2>
+            <p>Installing Rust is straightforward. Follow the steps below according to your operating system.</p>
+        
+            <h3>Windows</h3>
+            <p>On Windows, download and run the <a href="https://win.rustup.rs" target="_blank">rustup-init.exe</a> from the official Rust website. It will start the installation in a CMD window and guide you through the process.</p>
+        
+            <h3>macOS and Linux</h3>
+            <p>Open a terminal and execute the following command:</p>
+            <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+            <p>This script downloads and runs `rustup`, Rust's toolchain manager, which in turn installs `rustc`, `cargo`, and other standard tools.</p>
+        
+            <h3>Verifying Installation</h3>
+            <p>Restart your terminal and then run:</p>
+            <pre><code class="language-bash">rustc --version</code></pre>
+            <p>If Rust has been installed correctly, you should see the version number, commit hash, and commit date of the compiler.</p>
+        
+            <h3>Updating Rust</h3>
+            <p>To update Rust, simply run:</p>
+            <pre><code class="language-bash">rustup update</code></pre>
+        
+            <h3>Configuring the PATH</h3>
+            <p>After installation, `rustc`, `cargo`, and other tools are added to your PATH by the installation script. If you encounter a 'command not found' error, ensure your PATH is set up correctly. For most users, the installer configures the PATH. If manual configuration is needed, follow the instructions provided at the end of the installation process.</p>
+        
+            <h3>Uninstalling Rust</h3>
+            <p>If you need to uninstall Rust, you can do so by running:</p>
+            <pre><code class="language-bash">rustup self uninstall</code></pre>
+        
+            <h3>Troubleshooting</h3>
+            <p>If you encounter issues during installation:</p>
+            <ul>
+                <li>Ensure your internet connection is stable.</li>
+                <li>Check if your system meets the <a href="https://www.rust-lang.org/learn/get-started" target="_blank">basic requirements</a>.</li>
+                <li>For Windows, ensure you have the C++ build tools installed for Visual Studio 2013 or later.</li>
+                <li>Consult the <a href="https://www.rust-lang.org/learn" target="_blank">Rust documentation</a> or seek help on the <a href="https://users.rust-lang.org/" target="_blank">Rust Users Forum</a>.</li>
+            </ul>
+        </section>
+        <section id="hello-world" class="content-section">
+            <h2>Hello World in Rust</h2>
+            <p>Rust is a modern systems programming language designed for performance, reliability, and productivity. It has unique features like ownership, zero-cost abstractions, and safe concurrency. Writing a "Hello World" program is a traditional way to start exploring a new programming language. In Rust, this simple program introduces several key concepts.</p>
+            
+            <h3>Setting Up Your Environment</h3>
+            <p>Before writing Rust code, ensure Rust is installed on your system. Use the following command in your terminal:</p>
+            <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+            <p>After installation, verify it by running <code>rustc --version</code>. Rust's package manager and build system, Cargo, will also be installed.</p>
+            
+            <h3>Creating a New Project</h3>
+            <p>With Rust installed, create a new project named <em>hello_world</em> using Cargo:</p>
+            <pre><code class="language-bash">cargo new hello_world</code></pre>
+            <p>This command generates a new directory called <em>hello_world</em> with a basic project structure. Navigate into your new project with <code>cd hello_world</code>.</p>
+            
+            <h3>Understanding the Project Structure</h3>
+            <p>A newly created Rust project contains a <em>Cargo.toml</em> file, defining project metadata and dependencies, and a <em>src</em> directory, where your Rust source files reside. The <em>src/main.rs</em> file is your project's entry point.</p>
+            
+            <h3>Writing the Hello World Program</h3>
+            <p>Open <em>src/main.rs</em> and enter the following Rust code:</p>
+            <pre><code class="language-rust">fn main() {
+            println!("Hello, world!");
+        }</code></pre>
+            <p>This program defines a main function, the entry point for Rust programs. The <code>println!</code> macro prints the string "Hello, world!" to the terminal.</p>
+            
+            <h3>Compiling and Running Your Program</h3>
+            <p>Back in the terminal, run your Rust program with Cargo:</p>
+            <pre><code class="language-bash">cargo run</code></pre>
+            <p>Cargo compiles your project and executes the resulting binary, displaying "Hello, world!" in the terminal.</p>
+            
+            <h3>Exploring Further</h3>
+            <p>The "Hello World" program, while simple, touches on several fundamental aspects of Rust programming:</p>
+            <ul>
+                <li><strong>Functions:</strong> The <code>fn</code> keyword declares new functions. The <code>main</code> function is the starting point of a Rust program.</li>
+                <li><strong>Macros:</strong> Rust macros, like <code>println!</code>, perform metaprogramming tasks such as code generation at compile time.</li>
+                <li><strong>Compilation:</strong> Rust programs are compiled to machine code for high performance. Cargo simplifies building and managing Rust projects.</li>
+            </ul>
+            <p>As you continue learning Rust, you'll delve deeper into these and other concepts, building a solid foundation for systems programming, web development, and more.</p>
+        </section>
+        
+        <section id="rust-control-flow" class="content-section">
+            <h2>Rust Control Flow</h2>
+            
+            <h3>if Expressions</h3>
+            <p>Rust's `if` expressions allow you to branch your code depending on conditions. Unlike many languages, `if` in Rust is an expression rather than a statement, meaning it can return a value.</p>
+            <pre><code class="language-rust">let number = 6;
+        
+        if number % 2 == 0 {
+            println!("{} is even", number);
+        } else {
+            println!("{} is odd", number);
+        }</code></pre>
+        
+            <h3>Using if in a let Statement</h3>
+            <p>Since `if` is an expression, it can be used on the right side of a `let` statement.</p>
+            <pre><code class="language-rust">let condition = true;
+        let number = if condition { 5 } else { 6 };
+        
+        println!("The value of number is: {}", number);</code></pre>
+        
+            <h3>Repetition with Loops</h3>
+            <p>Rust provides several ways to loop; the simplest is the `loop` keyword, which repeats a block of code forever or until you explicitly tell it to stop.</p>
+            <pre><code class="language-rust">let mut count = 0;
+        
+        loop {
+            count += 1;
+            if count == 3 {
+                println!("three");
+                continue;
+            } else if count == 5 {
+                println!("Exiting loop at five");
+                break;
+            }
+        }</code></pre>
+        
+            <h3>While Loops</h3>
+            <p>The `while` loop is similar to a `loop` but includes a condition that's checked before each iteration. The loop runs as long as the condition is true.</p>
+            <pre><code class="language-rust">let mut number = 3;
+        
+        while number != 0 {
+            println!("{}!", number);
+            number -= 1;
+        }
+        
+        println!("LIFTOFF!!!");</code></pre>
+        
+            <h3>For Loops and Iterating Over Collections</h3>
+            <p>For loops are the most commonly used loop construct in Rust. They work well with collections like arrays or vectors.</p>
+            <pre><code class="language-rust">let a = [10, 20, 30, 40, 50];
+        
+        for element in a.iter() {
+            println!("the value is: {}", element);
+        }</code></pre>
+            <p>For loops are also commonly used to execute code a certain number of times using a range.</p>
+            <pre><code class="language-rust">for number in (1..4).rev() {
+            println!("{}!", number);
+        }
+        println!("LIFTOFF!!!");</code></pre>
+        
+            <h3>match Statements</h3>
+            <p>The `match` control flow operator allows for pattern matching, which can be seen as a more powerful version of a switch statement found in other languages.</p>
+            <pre><code class="language-rust">enum Coin {
+            Penny,
+            Nickel,
+            Dime,
+            Quarter,
+        }
+        
+        let coin = Coin::Quarter;
+        let value = match coin {
+            Coin::Penny => 1,
+            Coin::Nickel => 5,
+            Coin::Dime => 10,
+            Coin::Quarter => 25,
+        };
+        
+        println!("The coin is worth: {} cents", value);</code></pre>
+        
+            <p>This section has introduced the basic control flow mechanisms in Rust, showcasing its versatile and powerful syntax for managing the flow of execution in your programs.</p>
+        </section>
+        <section id="rust-primitives" class="content-section">
+            <h2>Rust Data Types & Primitives</h2>
+            <p>Rust offers various primitive data types, fundamental to building more complex structures. Here's an overview:</p>
+            
+            <h3>Scalar Types</h3>
+            <p>Scalar types represent a single value. Rust has four primary scalar types:</p>
+            <ul>
+                <li><strong>Integers:</strong> Fixed-size numbers (e.g., <code>i32</code>, <code>u64</code>). Rust provides both signed (<code>i</code>) and unsigned (<code>u</code>) variants.</li>
+                <li><strong>Floating-point numbers:</strong> Numbers with decimal points (e.g., <code>f32</code>, <code>f64</code>).</li>
+                <li><strong>Boolean:</strong> Logical value which can be either <code>true</code> or <code>false</code>.</li>
+                <li><strong>Character:</strong> Single Unicode scalar value (e.g., <code>'a'</code>, <code>'Ω'</code>, <code>'∂'</code>). Defined with single quotes.</li>
+            </ul>
+        
+            <h3>Compound Types</h3>
+            <p>Compound types can group multiple values into one type. Rust has two primitive compound types:</p>
+            <ul>
+                <li><strong>Tuples:</strong> A general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length.</li>
+                <li><strong>Arrays:</strong> Every element of an array must have the same type. Arrays in Rust have a fixed length.</li>
+            </ul>
+        
+            <h3>Example Usage</h3>
+            <p>Here is a simple example demonstrating the declaration and use of Rust's primitive data types:</p>
+            <pre><code class="language-rust">fn main() {
+            // Integer
+            let x: i32 = 100;
+            
+            // Floating-point
+            let y: f64 = 3.14;
+            
+            // Boolean
+            let is_active: bool = true;
+            
+            // Character
+            let letter: char = 'R';
+        
+            // Tuple
+            let tup: (i32, f64, u8) = (500, 6.4, 1);
+        
+            // Array
+            let arr: [i32; 5] = [1, 2, 3, 4, 5];
+        
+            println!("Integer: {}, Float: {}, Active: {}, Letter: {}, Tuple: {:?}, Array: {:?}", x, y, is_active, letter, tup, arr);
+        }</code></pre>
+        
+            <p>Understanding and using Rust's primitive data types is fundamental for effective Rust programming, laying the groundwork for more complex data structures and algorithms.</p>
+        </section>
+        
+        
+        <section id="rust-functions" class="content-section">
+            <h2>Rust Functions</h2>
+            <p>Functions are central to Rust. They are defined with <code>fn</code> and have a set of parameters and a return type. By default, functions return the <code>()</code> type, equivalent to void in other languages.</p>
+        
+            <h3>Defining Functions</h3>
+            <pre><code class="language-rust">fn function_name(parameter: Type) -> ReturnType {
+            // Function body
+        }</code></pre>
+        
+            <h3>Example: Hello World Function</h3>
+            <pre><code class="language-rust">fn hello_world() {
+            println!("Hello, world!");
+        }</code></pre>
+            <p>To call a function, use its name followed by parentheses:</p>
+            <pre><code class="language-rust">hello_world();</code></pre>
+        
+            <h3>Parameters and Return Values</h3>
+            <p>Functions can have parameters and return values. Parameters are specified in the function signature, and the return value is specified after the arrow (<code>-&gt;</code>).</p>
+        
+            <h3>Example: Add Function</h3>
+            <pre><code class="language-rust">fn add(a: i32, b: i32) -> i32 {
+            a + b
+        }</code></pre>
+            <p>In Rust, the last expression in a function can be used as a return value without needing the <code>return</code> keyword.</p>
+        
+            <h3>Function with Return Statement</h3>
+            <pre><code class="language-rust">fn is_even(num: i32) -> bool {
+            if num % 2 == 0 {
+                return true;
+            }
+            false
+        }</code></pre>
+        
+            <h3>Function Pointers</h3>
+            <p>Rust supports passing functions as arguments to other functions, known as function pointers. This is useful for callbacks and higher-order functions.</p>
+            <pre><code class="language-rust">fn operate_on_two(a: i32, b: i32, operation: fn(i32, i32) -> i32) -> i32 {
+            operation(a, b)
+        }</code></pre>
+        
+            <h3>Example: Using Function Pointers</h3>
+            <pre><code class="language-rust">fn subtract(a: i32, b: i32) -> i32 {
+            a - b
+        }
+        
+        let result = operate_on_two(10, 5, subtract);
+        println!("The result is {}", result);</code></pre>
+        
+            <h3>Closures</h3>
+            <p>Rust also supports closures, anonymous functions that can capture their environment. Closures are often used when a short function is needed for a one-time use, especially with iterators or other functional programming patterns.</p>
+        
+            <h3>Example: Using a Closure</h3>
+            <pre><code class="language-rust">let add_one = |x: i32| x + 1;
+        println!("6 + 1 = {}", add_one(6));</code></pre>
+        
+            <p>Functions and closures are powerful tools in Rust, enabling clear, concise, and safe code. By understanding and using them effectively, you can take advantage of Rust's type system and ownership model to write robust applications.</p>
+        </section>
+        
+        <section id="rust-ownership" class="content-section">
+            <h1>Rust Ownership</h1>
+            <p>Ownership is a unique feature of Rust that enables memory safety guarantees without the overhead of a garbage collector. It revolves around three main rules:</p>
+            <ol>
+                <li>Each value in Rust has a variable that's called its owner.</li>
+                <li>There can only be one owner at a time.</li>
+                <li>When the owner goes out of scope, the value will be dropped.</li>
+            </ol>
+        
+            <h3>Variable Scope</h3>
+            <p>A variable is valid from the point it's declared until the end of the scope.</p>
+            <pre><code class="language-rust">{
+            let s = "hello"; // s is valid from this point
+            // do stuff with s
+        } // this scope is now over, and s is no longer valid</code></pre>
+        
+            <h3>Moving Ownership</h3>
+            <p>In Rust, assigning a value to another variable moves ownership. This mechanism prevents data races at compile time.</p>
+            <pre><code class="language-rust">let x = String::from("hello");
+        let y = x;
+        // x is no longer valid here</code></pre>
+        
+            <h3>Cloning</h3>
+            <p>To deeply copy heap data, not just the stack data, use the <code>clone</code> method.</p>
+            <pre><code class="language-rust">let x = String::from("hello");
+        let y = x.clone();
+        // x is still valid here</code></pre>
+        
+            <h3>Copy Trait</h3>
+            <p>Types that are stored on the stack entirely (like integers) have the <code>Copy</code> trait. Assigning one variable to another makes a copy of the data.</p>
+            <pre><code class="language-rust">let x = 5;
+        let y = x;
+        // x is still valid here</code></pre>
+        
+            <h3>Ownership and Functions</h3>
+            <p>Passing a variable to a function will move or copy, just as assignment does.</p>
+            <pre><code class="language-rust">fn main() {
+            let s = String::from("hello");
+            takes_ownership(s);
+            // s is no longer valid here
+        }
+        
+        fn takes_ownership(some_string: String) {
+            println!("{}", some_string);
+        }</code></pre>
+        
+            <h3>Return Values and Scope</h3>
+            <p>Returning values can also transfer ownership.</p>
+            <pre><code class="language-rust">fn main() {
+            let s1 = gives_ownership();
+            let s2 = String::from("hello");
+            let s3 = takes_and_gives_back(s2);
+        }
+        
+        fn gives_ownership() -> String {
+            let some_string = String::from("hello");
+            some_string
+        }
+        
+        fn takes_and_gives_back(a_string: String) -> String {
+            a_string
+        }</code></pre>
+        
+            <p>Understanding ownership is crucial for writing safe and efficient Rust code. It ensures memory safety by freeing up resources once they are no longer needed and prevents data races by enforcing a clear ownership model for data.</p>
+        </section>
+        
+        <section id="rust-borrowing" class="content-section">
+            <h2>Rust Borrowing</h2>
+            <p>Borrowing in Rust allows you to access data without taking ownership of it, enabling safe and efficient sharing of data.</p>
+        
+            <h3>References</h3>
+            <p>Creating a reference to a value lets you borrow it. References are immutable by default.</p>
+            <pre><code class="language-rust">let s1 = String::from("hello");
+        let len = calculate_length(&s1);
+        
+        fn calculate_length(s: &String) -> usize {
+            s.len()
+        }</code></pre>
+            <p>Here, <code>s1</code> is not moved into <code>calculate_length</code>, but a reference to <code>s1</code> is passed instead.</p>
+        
+            <h3>Mutable References</h3>
+            <p>Mutable references allow you to change the value you are borrowing. However, you can have only one mutable reference to a particular piece of data in a particular scope. This restriction prevents data races.</p>
+            <pre><code class="language-rust">let mut s = String::from("hello");
+        change(&mut s);
+        
+        fn change(some_string: &mut String) {
+            some_string.push_str(", world");
+        }</code></pre>
+        
+            <h3>Dangling References</h3>
+            <p>Rust guarantees that references will never be dangling: you cannot have a reference to some data that goes out of scope before the reference does.</p>
+            <pre><code class="language-rust">// This code will not compile
+        fn dangle() -> &String {
+            let s = String::from("hello");
+            &s
+        }</code></pre>
+        
+            <h3>The Rules of References</h3>
+            <ol>
+                <li>At any given time, you can have either one mutable reference or any number of immutable references.</li>
+                <li>References must always be valid.</li>
+            </ol>
+        
+            <h3>Slicing</h3>
+            <p>Slices let you reference a contiguous sequence of elements in a collection rather than the entire collection.</p>
+            <pre><code class="language-rust">let s = String::from("hello world");
+        let hello = &s[0..5];
+        let world = &s[6..11];</code></pre>
+        
+            <p>Understanding borrowing is key to writing safe and efficient Rust programs. It allows multiple parts of your code to access data without taking ownership, thereby preventing unnecessary data copying.</p>
+        </section>
+        
+        <section id="rust-structs" class="content-section">
+            <h2>Rust Structs</h2>
+            <p>Structs in Rust are custom data types that let you name and package together multiple related values that make up a meaningful group.</p>
+        
+            <h3>Defining a Struct</h3>
+            <pre><code class="language-rust">struct User {
+            username: String,
+            email: String,
+            sign_in_count: u64,
+            active: bool,
+        }</code></pre>
+        
+            <h3>Creating Instances</h3>
+            <pre><code class="language-rust">let user1 = User {
+            email: String::from("someone@example.com"),
+            username: String::from("someusername123"),
+            active: true,
+            sign_in_count: 1,
+        };</code></pre>
+        
+            <h3>Mutable Structs</h3>
+            <p>All fields in a struct are immutable by default. To make a struct mutable, use <code>mut</code>.</p>
+            <pre><code class="language-rust">let mut user1 = User {
+            email: String::from("someone@example.com"),
+            username: String::from("someusername123"),
+            active: true,
+            sign_in_count: 1,
+        };</code></pre>
+        
+            <h3>Field Init Shorthand</h3>
+            <p>When variables and fields have the same name, you can use the field init shorthand.</p>
+            <pre><code class="language-rust">fn build_user(email: String, username: String) -> User {
+            User {
+                email,
+                username,
+                active: true,
+                sign_in_count: 1,
+            }
+        }</code></pre>
+        
+            <h3>Struct Update Syntax</h3>
+            <p>Use the struct update syntax to create a new instance from an old one.</p>
+            <pre><code class="language-rust">let user2 = User {
+            email: String::from("another@example.com"),
+            ..user1
+        };</code></pre>
+        
+            <h3>Tuple Structs</h3>
+            <p>Tuple structs have the structure of a tuple, named with a struct name.</p>
+            <pre><code class="language-rust">struct Color(i32, i32, i32);
+        let black = Color(0, 0, 0);</code></pre>
+        
+            <h3>Unit-Like Structs</h3>
+            <p>Structs without any fields, useful for traits.</p>
+            <pre><code class="language-rust">struct AlwaysEqual;</code></pre>
+        
+            <h3>Example Usage</h3>
+            <pre><code class="language-rust">let user = User {
+            email: String::from("user@example.com"),
+            username: String::from("username"),
+            active: true,
+            sign_in_count: 1,
+        };
+        
+        println!("User's email: {}", user.email);</code></pre>
+        
+            <p>Structs are a powerful way to structure related data in Rust, offering clarity and type safety for handling complex data shapes.</p>
+        </section>
+        
+        <section id="rust-modules" class="content-section">
+            <h2>Rust Modules</h2>
+            <p>Modules in Rust are used to organize code into namespaces to increase readability and reusability. They also help control the privacy of items, such as functions and structs.</p>
+            
+            <h3>Defining Modules</h3>
+            <p>Use the <code>mod</code> keyword to define a module.</p>
+            <pre><code class="language-rust">mod my_module {
+            // Module content
+        }</code></pre>
+        
+            <h3>Module File Structure</h3>
+            <p>Rust modules can be defined in separate files or directories for better organization. For a module named <code>my_module</code>, Rust looks for a file named <code>my_module.rs</code> or a directory with a <code>mod.rs</code> file inside it.</p>
+        
+            <h3>Using Modules</h3>
+            <p>To access items in a module, use the <code>::</code> syntax.</p>
+            <pre><code class="language-rust">mod my_module {
+            pub fn my_function() {
+                println!("Hello from my_module!");
+            }
+        }
+        
+        fn main() {
+            my_module::my_function();
+        }</code></pre>
+        
+            <h3>Privacy</h3>
+            <p>By default, items in a module are private. Use the <code>pub</code> keyword to make them public.</p>
+        
+            <h3>Nesting Modules</h3>
+            <p>Modules can be nested within other modules.</p>
+            <pre><code class="language-rust">mod my_module {
+            pub mod my_submodule {
+                pub fn my_function() {
+                    println!("Hello from my_submodule!");
+                }
+            }
+        }</code></pre>
+        
+            <h3>Re-exporting with <code>pub use</code></h3>
+            <p>Re-export items with <code>pub use</code> to allow external code to use imported items.</p>
+            <pre><code class="language-rust">mod my_module {
+            pub fn my_function() {}
+        }
+        
+        pub use my_module::my_function;</code></pre>
+        
+            <h3>Importing External Crates</h3>
+            <p>Use <code>extern crate</code> to import external crates. This is often done in the root file of a binary crate (<code>main.rs</code>) or library crate (<code>lib.rs</code>).</p>
+        
+            <h3>Path Simplification with <code>use</code></h3>
+            <p>The <code>use</code> keyword simplifies the path to items in modules or crates, making code cleaner.</p>
+            <pre><code class="language-rust">use my_module::my_function;
+        
+        fn main() {
+            my_function();
+        }</code></pre>
+        
+            <p>Understanding and effectively using modules is crucial for organizing Rust projects, especially as they grow in size and complexity. Modules help manage scope and privacy, enabling developers to build modular, scalable applications.</p>
+        </section>
+        
+        <section id="rust-enums" class="content-section">
+            <h2>Rust Enums</h2>
+            <p>Enums in Rust are types which have a few definite values called variants. They are used to group related values and handle different cases with type safety.</p>
+        
+            <h3>Defining Enums</h3>
+            <pre><code class="language-rust">enum Direction {
+            Up,
+            Down,
+            Left,
+            Right,
+        }</code></pre>
+        
+            <h3>Using Enums</h3>
+            <p>To use an enum, specify the variant using the <code>::</code> syntax.</p>
+            <pre><code class="language-rust">let direction = Direction::Up;</code></pre>
+        
+            <h3>Match Control Flow Operator</h3>
+            <p>The <code>match</code> operator allows pattern matching against enums, executing code based on the variant.</p>
+            <pre><code class="language-rust">match direction {
+            Direction::Up => println!("Going up!"),
+            Direction::Down => println!("Going down!"),
+            Direction::Left => println!("Going left!"),
+            Direction::Right => println!("Going right!"),
+        }</code></pre>
+        
+            <h3>Enum Values with Data</h3>
+            <p>Enums can also hold data. For example, to define an <code>Option</code> type:</p>
+            <pre><code class="language-rust">enum Option&lt;T&gt; {
+            Some(T),
+            None,
+        }</code></pre>
+        
+            <h3>Using Enum to Handle Nullable Values</h3>
+            <p><code>Option</code> is extensively used in Rust for handling nullable values instead of <code>null</code>.</p>
+            <pre><code class="language-rust">let some_number = Some(5);
+        let no_number: Option&lt;i32&gt; = None;</code></pre>
+        
+            <h3>Enums in Structs</h3>
+            <p>Enums can be used within structs to create complex data types.</p>
+            <pre><code class="language-rust">struct Point {
+            x: i32,
+            y: i32,
+            direction: Direction,
+        }</code></pre>
+        
+            <h3>Impl Blocks for Enums</h3>
+            <p>Enums can have <code>impl</code> blocks to define methods on them.</p>
+            <pre><code class="language-rust">impl Direction {
+            fn as_string(&self) -> &'static str {
+                match self {
+                    Direction::Up => "Up",
+                    Direction::Down => "Down",
+                    Direction::Left => "Left",
+                    Direction::Right => "Right",
+                }
+            }
+        }</code></pre>
+        
+            <p>Enums are a powerful feature in Rust, offering a way to work with different types in a safe and expressive manner. They are fundamental to Rust's pattern matching and are used to handle various cases with precision and clarity.</p>
+        </section>
+        
+        <section id="rust-collections" class="content-section">
+            <h2>Rust Collections</h2>
+            <p>Rust provides several collection types to store multiple values. The most commonly used are:</p>
+            <ul>
+                <li><code>Vec&lt;T&gt;</code>: A dynamic array that can grow or shrink in size.</li>
+                <li><code>HashMap&lt;K, V&gt;</code>: A collection of key-value pairs that provides quick lookup by key.</li>
+                <li><code>HashSet&lt;T&gt;</code>: A collection of unique elements that quickly checks for the presence of a value.</li>
+            </ul>
+        
+            <h3>Vec&lt;T&gt;</h3>
+            <p>Use <code>Vec::new()</code> to create an empty vector or <code>vec!</code> macro for initialization with values.</p>
+            <pre><code class="language-rust">let mut vec = Vec::new();
+        vec.push(1);</code></pre>
+        
+            <h3>HashMap&lt;K, V&gt;</h3>
+            <p>Create using <code>HashMap::new()</code> and add elements with <code>insert()</code>.</p>
+            <pre><code class="language-rust">use std::collections::HashMap;
+        
+        let mut map = HashMap::new();
+        map.insert("key", "value");</code></pre>
+        
+            <h3>HashSet&lt;T&gt;</h3>
+            <p>Initialized similarly to <code>HashMap</code>, but stores only keys.</p>
+            <pre><code class="language-rust">use std::collections::HashSet;
+        
+        let mut set = HashSet::new();
+        set.insert("value");</code></pre>
+        
+            <p>What method is used to add an element to a <code>Vec&lt;T&gt;</code>?</p>
+            <input type="text" id="vec-answer" placeholder="Type method name here">
+            <button onclick="checkAnswer()">Submit Answer>></button>
+            <p id="feedback"></p>
+        </section>
+        
+      
+        
+        <section id="rust-error-handling" class="content-section">
+            <h2>Rust Error Handling</h2>
+            <p>Rust categorizes errors into two main types: recoverable and unrecoverable errors. It uses <code>Result</code> and <code>Option</code> enums for recoverable errors and the <code>panic!</code> macro for unrecoverable errors.</p>
+        
+            <h3>Recoverable Errors with <code>Result</code></h3>
+            <p><code>Result</code> is an enum defined as <code>Result&lt;T, E&gt;</code>, where <code>T</code> represents the type of value returned in a success case, and <code>E</code> represents the type of error. A common use is file handling:</p>
+            <pre><code class="language-rust">use std::fs::File;
+        
+        fn main() {
+            let f = File::open("hello.txt");
+            let f = match f {
+                Ok(file) => file,
+                Err(error) => panic!("Problem opening the file: {:?}", error),
+            };
+        }</code></pre>
+        
+            <h3>Handling Multiple Error Cases</h3>
+            <p>Matching on different errors allows for more sophisticated error handling:</p>
+            <pre><code class="language-rust">use std::fs::File;
+        use std::io::ErrorKind;
+        
+        fn main() {
+            let f = File::open("hello.txt");
+        
+            let f = match f {
+                Ok(file) => file,
+                Err(error) => match error.kind() {
+                    ErrorKind::NotFound => match File::create("hello.txt") {
+                        Ok(fc) => fc,
+                        Err(e) => panic!("Problem creating the file: {:?}", e),
+                    },
+                    other_error => panic!("Problem opening the file: {:?}", other_error),
+                },
+            };
+        }</code></pre>
+        
+            <h3>Shortcuts for Panic on Error: <code>unwrap</code> and <code>expect</code></h3>
+            <p>The <code>unwrap</code> method returns the value if <code>Ok</code> or calls <code>panic!</code> if <code>Err</code>. The <code>expect</code> method also calls <code>panic!</code> but allows custom error messages:</p>
+            <pre><code class="language-rust">let f = File::open("hello.txt").unwrap();
+        let f = File::open("hello.txt").expect("Failed to open hello.txt");</code></pre>
+        
+            <h3>Recoverable Errors with <code>Option</code></h3>
+            <p>The <code>Option</code> enum is used when a value could be <code>Some</code> value or <code>None</code>. It's a safer way to handle cases that might not yield a value:</p>
+            <pre><code class="language-rust">fn main() {
+            let some_option_value: Option&lt;i32&gt; = Some(5);
+            let absent_number: Option&lt;i32&gt; = None;
+        }</code></pre>
+        
+            <h3>Unrecoverable Errors with <code>panic!</code></h3>
+            <p>For errors that you don't expect to recover from, Rust has the <code>panic!</code> macro. It prints an error message, unwinds and cleans up the stack, and then quits:</p>
+            <pre><code class="language-rust">fn main() {
+            panic!("crash and burn");
+        }</code></pre>
+        
+            <p>Error handling in Rust is explicit and consistent. It encourages handling errors upfront, leading to more robust and predictable code.</p>
+        </section>
+        
+        <section id="rust-generic-types" class="content-section">
+            <h2>Generic Types in Rust</h2>
+            <p>Generics allow for the creation of function signatures or data types that can operate on multiple types while only being written once.</p>
+        
+            <h3>Generic Data Types</h3>
+            <p>Structs, enums, and functions can all be defined to operate over generic types.</p>
+            <pre><code class="language-rust">struct Point&lt;T&gt; {
+            x: T,
+            y: T,
+        }
+        
+        enum Option&lt;T&gt; {
+            Some(T),
+            None,
+        }
+        
+        fn repeat&lt;T&gt;(value: T, times: usize) -&gt; Vec&lt;T&gt; 
+        where T: Clone {
+            vec![value; times]
+        }</code></pre>
+        
+            <h3>Using Generics in Functions</h3>
+            <p>Generics in function definitions require declaring type parameters that can be used within the function body.</p>
+            <pre><code class="language-rust">fn largest&lt;T&gt;(list: &[T]) -&gt; T 
+        where T: PartialOrd + Copy {
+            let mut largest = list[0];
+            for &item in list.iter() {
+                if item &gt; largest {
+                    largest = item;
+                }
+            }
+            largest
+        }</code></pre>
+        
+            <h3>Generic Type Parameters in Structs</h3>
+            <p>Structs can also be generic, allowing for the creation of type-agnostic data structures.</p>
+            <pre><code class="language-rust">struct Point&lt;T&gt; {
+            x: T,
+            y: T,
+        }</code></pre>
+        
+            <h3>Generics in Enum Definitions</h3>
+            <p>Enums can use generics to be versatile across different types.</p>
+            <pre><code class="language-rust">enum Result&lt;T, E&gt; {
+            Ok(T),
+            Err(E),
+        }</code></pre>
+        
+            <h3>Performance of Code Using Generics</h3>
+            <p>Rust implements generics in such a way that there's no runtime cost when using them. Rust accomplishes this through monomorphization, transforming generic code into specific code by filling in the concrete types that are used when compiled.</p>
+        
+            <h3>Constraints on Generic Types</h3>
+            <p>Bounds can be applied to generics to constrain the types that might be used with them. This is often necessary for operations that might not work on every possible type.</p>
+            <pre><code class="language-rust">fn largest&lt;T&gt;(list: &[T]) -&gt; T 
+        where T: PartialOrd + Copy {
+            // function body
+        }</code></pre>
+        
+            <p>Using generic types effectively can significantly reduce code duplication and increase flexibility without sacrificing performance.</p>
+        </section>
+        
+        
+        
+        <section id="rust-tests" class="content-section">
+            <h2>Testing in Rust</h2>
+            <p>Rust's built-in test framework provides a way to write unit tests, integration tests, and documentation tests.</p>
+        
+            <h3>Unit Tests</h3>
+            <p>Unit tests are written in the same files as the code. They test individual modules of code in isolation.</p>
+            <pre><code class="language-rust">#[cfg(test)]
+        mod tests {
+            use super::*;
+        
+            #[test]
+            fn it_works() {
+                assert_eq!(2 + 2, 4);
+            }
+        }</code></pre>
+        
+            <h3>Running Tests</h3>
+            <p>Tests can be run with the command <code>cargo test</code>.</p>
+        
+            <h3>Test Attributes</h3>
+            <p>The <code>#[test]</code> attribute marks a function as a test case. Use <code>#[ignore]</code> to skip running a specific test.</p>
+        
+            <h3>Integration Tests</h3>
+            <p>Integration tests are external to your library and use your code the same way any other code would. Place integration tests in the <code>tests</code> directory at the project root.</p>
+        
+            <h3>Example Integration Test</h3>
+            <pre><code class="language-rust">// tests/integration_test.rs
+        use my_crate;
+        
+        #[test]
+        fn it_adds_two() {
+            assert_eq!(4, my_crate::add_two(2));
+        }</code></pre>
+        
+            <h3>Documentation Tests</h3>
+            <p>Rust lets you write tests in the documentation. The code in documentation comments (<code>///</code>) is compiled and executed as a test.</p>
+        
+            <h3>Example Documentation Test</h3>
+            <pre><code class="language-rust">/// Adds two to the number given.
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// let arg = 5;
+        /// let answer = my_crate::add_two(arg);
+        ///
+        /// assert_eq!(7, answer);
+        /// ```
+        fn add_two(a: i32) -> i32 {
+            a + 2
+        }</code></pre>
+        
+            <p>Testing is a critical part of Rust's philosophy, encouraging developers to write tests alongside their code to ensure reliability and correctness.</p>
+        </section>
+        
+        <section id="rust-concurrency" class="content-section">
+            <h2>Rust Concurrency</h2>
+            <p>Concurrency in Rust is based on the principles of ownership and type checking to provide safe and efficient execution of programs. Rust's concurrency model aims to help you write programs that are free from data races and other concurrency errors.</p>
+        
+            <h3>Using Threads</h3>
+            <p>Rust provides a way to run code in parallel by spawning threads:</p>
+            <pre><code class="language-rust">use std::thread;
+        use std::time::Duration;
+        
+        fn main() {
+            thread::spawn(|| {
+                for i in 1..10 {
+                    println!("hi number {} from the spawned thread!", i);
+                    thread::sleep(Duration::from_millis(1));
+                }
+            });
+        
+            for i in 1..5 {
+                println!("hi number {} from the main thread!", i);
+                thread::sleep(Duration::from_millis(1));
+            }
+        }</code></pre>
+        
+            <h3>Join Handles</h3>
+            <p>To wait for a thread to finish, use its `JoinHandle`:</p>
+            <pre><code class="language-rust">let handle = thread::spawn(|| {
+            // thread code
+        });
+        
+        handle.join().unwrap();</code></pre>
+        
+            <h3>Message Passing</h3>
+            <p>Threads can communicate by sending messages through a channel:</p>
+            <pre><code class="language-rust">use std::sync::mpsc;
+        use std::thread;
+        
+        fn main() {
+            let (tx, rx) = mpsc::channel();
+        
+            thread::spawn(move || {
+                let msg = String::from("Hello");
+                tx.send(msg).unwrap();
+            });
+        
+            let received = rx.recv().unwrap();
+            println!("Got: {}", received);
+        }</code></pre>
+        
+            <h3>Shared State Concurrency</h3>
+            <p>Shared memory concurrency is managed through `Mutex` and `Arc` for safe access across threads:</p>
+            <pre><code class="language-rust">use std::sync::{Mutex, Arc};
+        use std::thread;
+        
+        fn main() {
+            let counter = Arc::new(Mutex::new(0));
+            let mut handles = vec![];
+        
+            for _ in 0..10 {
+                let counter = Arc::clone(&counter);
+                let handle = thread::spawn(move || {
+                    let mut num = counter.lock().unwrap();
+                    *num += 1;
+                });
+                handles.push(handle);
+            }
+        
+            for handle in handles {
+                handle.join().unwrap();
+            }
+        
+            println!("Result: {}", *counter.lock().unwrap());
+        }</code></pre>
+        
+            <p>Rust's concurrency features enable the creation of parallel and safe concurrent programs by leveraging the language's strong type system and ownership model.</p>
+        </section>
+        
+        <section id="rust-cargo" class="content-section">
+            <h2>Cargo: Rust's Package Manager</h2>
+            <p>Cargo is Rust's build system and package manager, handling tasks from building code to downloading and compiling package dependencies.</p>
+        
+            <h3>Creating a New Project</h3>
+            <p>To start a new Rust project with Cargo:</p>
+            <pre><code class="language-bash">cargo new project_name</code></pre>
+            <p>This creates a new directory named <code>project_name</code> with a Cargo configuration file (<code>Cargo.toml</code>) and a <code>src</code> directory.</p>
+        
+            <h3>Building Your Project</h3>
+            <p>To compile your project:</p>
+            <pre><code class="language-bash">cargo build</code></pre>
+            <p>This command generates an executable in <code>target/debug/project_name</code>.</p>
+        
+            <h3>Running Your Project</h3>
+            <p>To compile and run your project in one step:</p>
+            <pre><code class="language-bash">cargo run</code></pre>
+        
+            <h3>Project Dependencies</h3>
+            <p>Add dependencies by specifying them under <code>[dependencies]</code> in <code>Cargo.toml</code>.</p>
+            <pre><code>[dependencies]
+        serde = "1.0"</code></pre>
+            <p>Cargo fetches dependencies from [crates.io](https://crates.io), the Rust package registry.</p>
+        
+            <h3>Building for Release</h3>
+            <p>To compile your project for release:</p>
+            <pre><code class="language-bash">cargo build --release</code></pre>
+            <p>This command optimizes your executable for performance and stores it in <code>target/release</code> instead of <code>target/debug</code>.</p>
+        
+            <h3>Updating Dependencies</h3>
+            <p>To update project dependencies:</p>
+            <pre><code class="language-bash">cargo update</code></pre>
+            <p>This updates the <code>Cargo.lock</code> file with the latest versions of dependencies as per the version constraints in <code>Cargo.toml</code>.</p>
+        
+            <h3>Documentation</h3>
+            <p>To build and open your project's documentation:</p>
+            <pre><code class="language-bash">cargo doc --open</code></pre>
+        
+            <p>Cargo simplifies many aspects of Rust development, from project creation to dependency management. Its integration with the Rust ecosystem provides a seamless experience for developing, building, and sharing Rust packages.</p>
+        </section>
+        
+        <section id="rust-pattern-matching" class="content-section">
+            <h2>Rust Pattern Matching</h2>
+            <p>Pattern matching in Rust is a powerful feature used to control the flow of execution based on pattern matching against literals, variables, wildcards, and many other patterns.</p>
+        
+            <h3>The <code>match</code> Control Flow Operator</h3>
+            <p>The <code>match</code> operator allows branching of code based on the pattern of the value passed to it.</p>
+            <pre><code class="language-rust">let x = 1;
+        
+        match x {
+            1 =&gt; println!("one"),
+            2 =&gt; println!("two"),
+            3 =&gt; println!("three"),
+            _ =&gt; println!("anything"),
+        }</code></pre>
+        
+            <h3>Patterns that Bind to Values</h3>
+            <p>Patterns can bind to values for further use within the arm.</p>
+            <pre><code class="language-rust">let x = Some(5);
+        
+        match x {
+            Some(y) =&gt; println!("Matched, y = {:?}", y),
+            _ =&gt; println!("Default case, x = {:?}", x),
+        }</code></pre>
+        
+            <h3>Multiple Patterns</h3>
+            <p>Match arms can cover multiple patterns using the <code>|</code> syntax.</p>
+            <pre><code class="language-rust">let x = 1;
+        
+        match x {
+            1 | 2 =&gt; println!("one or two"),
+            _ =&gt; println!("anything"),
+        }</code></pre>
+        
+            <h3>Matching Ranges of Values</h3>
+            <p>Ranges of values can be matched using <code>..=</code> in patterns.</p>
+            <pre><code class="language-rust">let x = 5;
+        
+        match x {
+            1..=5 =&gt; println!("one through five"),
+            _ =&gt; println!("something else"),
+        }</code></pre>
+        
+            <h3>Destructuring to Break Apart Values</h3>
+            <p><code>match</code> can destructure tuples, enums, pointers, and structs.</p>
+            <pre><code class="language-rust">let pair = (0, -2);
+        match pair {
+            (0, y) =&gt; println!("First is 0 and y is {:?}", y),
+            (x, 0) =&gt; println!("x is {:?} and last is 0", x),
+            _ =&gt; println!("It doesn't matter what they are"),
+        }</code></pre>
+        
+            <h3>Ignoring Parts of a Value</h3>
+            <p>Use <code>_</code> in patterns to ignore parts of a value.</p>
+            <pre><code class="language-rust">let pair = (0, -2);
+        match pair {
+            (0, _) =&gt; println!("First is 0 and ignore the second"),
+            _ =&gt; println!("Ignore all"),
+        }</code></pre>
+        
+            <p>Pattern matching in Rust provides a concise way for handling control flow. It's versatile, allowing matching against a wide variety of data types, and is a cornerstone of idiomatic Rust code for tasks like handling enums and destructuring values.</p>
+        </section>
+        
+        <section id="rust-ffi" class="content-section">
+            <h2>Rust Foreign Function Interface (FFI)</h2>
+            <p>The Foreign Function Interface (FFI) in Rust allows it to interface with other programming languages. This is crucial for calling C libraries and can be extended to other languages.</p>
+        
+            <h3>Calling C Functions from Rust</h3>
+            <p>To call a C function, declare it with <code>extern "C"</code> and then call it as you would a Rust function.</p>
+            <pre><code class="language-rust">// Declaration
+        extern "C" {
+            fn abs(input: i32) -> i32;
+        }
+        
+        // Usage
+        fn main() {
+            unsafe {
+                println!("The absolute value of -3 according to C is: {}", abs(-3));
+            }
+        }</code></pre>
+        
+            <h3>Exposing Rust Functions to C</h3>
+            <p>Rust functions can be made available to C by marking them with <code>#[no_mangle]</code> and <code>extern "C"</code>.</p>
+            <pre><code class="language-rust">#[no_mangle]
+        pub extern "C" fn double_input(input: i32) -> i32 {
+            input * 2
+        }</code></pre>
+        
+            <h3>Working with Complex Data Types</h3>
+            <p>Passing complex data types between C and Rust involves using pointers and careful management of ownership.</p>
+        
+            <h3>Using Non-Rust Libraries</h3>
+            <p>To use libraries written in languages other than Rust, such as C libraries, define the external functions you need, link to the library, and call the functions within <code>unsafe</code> blocks.</p>
+        
+            <h3>Safety Considerations</h3>
+            <p>Interoperability with C poses risks due to C's lack of safety guarantees. Always use <code>unsafe</code> blocks when calling foreign functions and minimize their use.</p>
+        
+            <h3>Example: Using a C Library</h3>
+            <p>Below is an example of linking to a C library and calling one of its functions from Rust.</p>
+            <pre><code class="language-rust">// In your build.rs
+        println!("cargo:rustc-link-lib=thelibrary");
+        
+        // In your Rust file
+        extern "C" {
+            fn the_c_function(arg: i32) -> i32;
+        }
+        
+        fn main() {
+            unsafe {
+                the_c_function(5);
+            }
+        }</code></pre>
+        
+            <p>Using FFI allows Rust programs to leverage existing C libraries, enabling a wide range of applications that require functionality not available in the Rust ecosystem.</p>
+        </section>
+        
+        <section id="rust-macros" class="content-section">
+            <h2>Rust Macros</h2>
+            <p>Macros in Rust are a way of writing code that writes other code, which is known as metaprogramming. They are a powerful feature used to reduce code repetition and improve maintainability.</p>
+        
+            <h3>Declaration and Usage</h3>
+            <p>Macros are declared using the <code>macro_rules!</code> attribute. They allow matching against patterns and take appropriate actions based on the pattern matched.</p>
+            <pre><code class="language-rust">macro_rules! say_hello {
+            () => {
+                println!("Hello!");
+            };
+        }</code></pre>
+            <p>To use the macro:</p>
+            <pre><code class="language-rust">say_hello!();</code></pre>
+        
+            <h3>Distinguishing Features</h3>
+            <p>Unlike functions, macros are expanded at compile time, allowing them to be used in contexts where functions cannot, such as in trait implementations or to define new syntax elements.</p>
+        
+            <h3>Example: vec! Macro</h3>
+            <p>The <code>vec!</code> macro is a standard library macro used to create a new <code>Vec</code> with particular values.</p>
+            <pre><code class="language-rust">let v: Vec&lt;u32&gt; = vec![1, 2, 3];</code></pre>
+        
+            <h3>Benefits and Drawbacks</h3>
+            <p>Macros can greatly reduce boilerplate code but may lead to code that's harder to read and debug if overused or used improperly.</p>
+        
+            <h3>Procedural Macros</h3>
+            <p>Beyond <code>macro_rules!</code>, Rust offers procedural macros for more complex scenarios. These include <code>#[derive]</code> macros for automatic trait implementation, attribute-like macros for attaching metadata or logic to items, and function-like macros that look like function calls but operate at compile time.</p>
+        
+            <h3>Best Practices</h3>
+            <p>When using macros:</p>
+            <ul>
+                <li>Strive for clarity. Macros can make code less transparent to new readers or to the developer themselves at a later time.</li>
+                <li>Use them to reduce repetition. A well-crafted macro can replace repetitive boilerplate with clearer, more concise code.</li>
+                <li>Consider alternatives such as functions or traits for simpler use cases where compile-time code generation is not necessary.</li>
+            </ul>
+        
+            <p>Understanding and utilizing Rust's macros can significantly enhance your coding efficiency and capability to manage complex patterns and repetitive tasks.</p>
+        </section>
+        
+        <section id="rust-async-await" class="content-section">
+            <h2>Async/Await in Rust</h2>
+            <p>Rust's async/await provides powerful primitives for writing asynchronous code that is both efficient and concise. Async/await allows for writing non-blocking code that can perform multiple tasks concurrently.</p>
+        
+            <h3>Async Functions</h3>
+            <p>Declare an asynchronous function using the <code>async</code> keyword. Async functions return a <code>Future</code>, which is a value that might not have completed computing yet.</p>
+            <pre><code class="language-rust">async fn fetch_data() -> u32 {
+            42 // simulated data fetching
+        }</code></pre>
+        
+            <h3>Awaiting a Future</h3>
+            <p>Use the <code>await</code> keyword to pause function execution until a <code>Future</code> is ready. The function continues executing in the meantime.</p>
+            <pre><code class="language-rust">let data = fetch_data().await;
+        println!("Data: {}", data);</code></pre>
+        
+            <h3>Executing Async Code</h3>
+            <p>To run async code, you need an executor. The Rust ecosystem provides several, such as <code>tokio</code> and <code>async-std</code>.</p>
+            <pre><code class="language-rust">// Using Tokio as an executor
+        #[tokio::main]
+        async fn main() {
+            let data = fetch_data().await;
+            println!("Data: {}", data);
+        }</code></pre>
+        
+            <h3>Combining Multiple Futures</h3>
+            <p>Use <code>future::join!</code> to wait for multiple futures concurrently. This increases efficiency by performing tasks in parallel.</p>
+            <pre><code class="language-rust">let (data1, data2) = futures::join!(fetch_data1(), fetch_data2());</code></pre>
+        
+            <h3>Error Handling</h3>
+            <p>Handle errors in async functions using <code>Result</code> types and the <code>?</code> operator, similar to synchronous Rust code.</p>
+            <pre><code class="language-rust">async fn fetch_data() -> Result<u32, FetchError> {
+            Ok(42) // simulated successful data fetching
+        }</code></pre>
+        
+            <h3>Async Blocks</h3>
+            <p>Create inline asynchronous computations with async blocks. They are useful for short, non-reusable async tasks.</p>
+            <pre><code class="language-rust">let future = async {  // Async block
+            let data = fetch_data().await;
+            println!("Data: {}", data);
+        };</code></pre>
+        
+            <p>Async/await in Rust simplifies asynchronous programming, allowing developers to write non-blocking code that's easy to read and maintain. By leveraging async/await alongside Rust's powerful type system and safety guarantees, you can build highly concurrent applications that are efficient and error-free.</p>
+        </section>
+        
+        <section id="rust-web-development" class="content-section">
+            <h2>Rust Web Development</h2>
+            <p>Rust is increasingly used for web development, offering performance, safety, and concurrency. Key frameworks and tools facilitate building web applications and services.</p>
+        
+            <h3>Actix-Web</h3>
+            <p>Actix-Web is a powerful, pragmatic, and extremely fast web framework for Rust.</p>
+            <pre><code class="language-rust">use actix_web::{web, App, HttpServer, Responder};
+        
+        async fn greet() -> impl Responder {
+            web::HttpResponse::Ok().body("Hello from Actix-Web!")
+        }
+        
+        #[actix_web::main]
+        async fn main() -> std::io::Result<()> {
+            HttpServer::new(|| {
+                App::new().route("/", web::get().to(greet))
+            })
+            .bind("127.0.0.1:8080")?
+            .run()
+            .await
+        }</code></pre>
+        
+            <h3>Rocket</h3>
+            <p>Rocket offers a simple, declarative API for writing web applications in Rust, focusing on ease-of-use, expressibility, and speed.</p>
+            <pre><code class="language-rust">#[macro_use] extern crate rocket;
+        
+        #[get("/")]
+        fn index() -> &'static str {
+            "Hello from Rocket!"
+        }
+        
+        #[launch]
+        fn rocket() -> _ {
+            rocket::build().mount("/", routes![index])
+        }</code></pre>
+        
+            <h3>Warp</h3>
+            <p>Warp is a composable web server framework that focuses on simplicity and performance, leveraging Rust's powerful futures.</p>
+            <pre><code class="language-rust">use warp::Filter;
+        
+        #[tokio::main]
+        async fn main() {
+            let hello = warp::path!("hello" / "warp")
+                .map(|| "Hello from Warp!");
+        
+            warp::serve(hello)
+                .run(([127, 0, 0, 1], 3030))
+                .await;
+        }</code></pre>
+        
+            <h3>Tide</h3>
+            <p>Tide, a minimal and pragmatic Rust web application framework, provides a smooth and type-safe API for rapid development.</p>
+            <pre><code class="language-rust">use tide::Request;
+        
+        async fn greet(req: Request<()>) -> tide::Result {
+            Ok(format!("Hello, {}!", req.param("name")?).into())
+        }
+        
+        #[async_std::main]
+        async fn main() -> tide::Result<()> {
+            let mut app = tide::new();
+            app.at("/:name").get(greet);
+            app.listen("127.0.0.1:8080").await?;
+            Ok(())
+        }</code></pre>
+        
+            <p>Rust's ecosystem for web development is growing, with each framework offering unique advantages. Choosing the right framework depends on your project's specific needs, such as performance, ease of use, or feature richness.</p>
+        </section>
+        
+        <section id="rust-embedded" class="content-section">
+            <h2>Embedded Programming with Rust</h2>
+            <p>Rust's guarantees of memory safety and its support for low-level operations make it an excellent choice for embedded programming. Embedded systems benefit from Rust's efficiency and safety, particularly in resource-constrained environments.</p>
+        
+            <h3>Advantages of Rust in Embedded Systems</h3>
+            <ul>
+                <li><strong>Zero Overhead:</strong> Rust provides abstractions that have little to no runtime cost, ideal for the performance-critical nature of embedded systems.</li>
+                <li><strong>Type Safety:</strong> Compile-time checks prevent common bugs that can be difficult to debug in embedded systems.</li>
+                <li><strong>Concurrency:</strong> Rust's ownership model ensures data race-free concurrency, a critical feature for real-time embedded systems.</li>
+            </ul>
+        
+            <h3>Getting Started with Embedded Rust</h3>
+            <p>To start with embedded Rust, you need to target a cross-compilation platform. Rust supports various <code>target triples</code> for different architectures.</p>
+        
+            <h3>Setting Up Your Environment</h3>
+            <p>Install <code>rustup</code> and add a cross-compilation target for your specific embedded platform, for example:</p>
+            <pre><code class="language-bash">rustup target add thumbv7em-none-eabihf</code></pre>
+        
+            <p>Use <code>cargo</code> to build for your target:</p>
+            <pre><code class="language-bash">cargo build --target thumbv7em-none-eabihf</code></pre>
+        
+            <h3>Using <code>no_std</code></h3>
+            <p>Rust standard library (std) is not suitable for direct use in embedded due to its dependency on an OS. Embedded systems typically use <code>no_std</code> attribute to exclude the standard library.</p>
+            <pre><code class="language-rust">#![no_std]
+        #![no_main]</code></pre>
+        
+            <h3>Common Libraries for Embedded Rust</h3>
+            <ul>
+                <li><code>embedded-hal</code>: Hardware abstraction layer for embedded systems.</li>
+                <li><code>cortex-m</code>: Low-level access to Cortex-M processors.</li>
+                <li><code>cortex-m-rt</code>: Startup and runtime for Cortex-M microcontrollers.</li>
+            </ul>
+        
+            <h3>Example: Blinking LED</h3>
+            <p>A simple example of embedded Rust is blinking an LED on a microcontroller:</p>
+            <pre><code class="language-rust">#![no_std]
+        #![no_main]
+        
+        use cortex_m_rt::entry;
+        use hal::{prelude::*, stm32};
+        use panic_halt as _;
+        
+        #[entry]
+        fn main() -> ! {
+            let dp = stm32::Peripherals::take().unwrap();
+            let gpioc = dp.GPIOC.split();
+            let mut led = gpioc.pc13.into_push_pull_output();
+            loop {
+                led.set_high().unwrap();
+                // delay
+                led.set_low().unwrap();
+                // delay
+            }
+        }</code></pre>
+        
+            <p>This basic example sets up a microcontroller to toggle an LED. Real-world applications involve more complex setups and configurations, depending on the hardware and specific requirements of the project.</p>
+        
+            <p>Embedded programming with Rust is a growing field, offering a more secure and efficient way to develop firmware and embedded applications. The Rust ecosystem continues to evolve, providing more libraries and tools to support embedded development.</p>
+        </section>
+        
+        <section id="rust-cross-compilation" class="content-section">
+            <h2>Rust Cross-Compilation</h2>
+            <p>Cross-compilation allows you to compile a program on one platform (host) to run on another (target). Rust supports cross-compilation out of the box, but it requires setting up the right toolchain and target platform.</p>
+        
+            <h3>Installing the Rust Toolchain</h3>
+            <p>Ensure you have Rust and Cargo installed. Use rustup to manage Rust versions and toolchains.</p>
+            <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+        
+            <h3>Adding a Target</h3>
+            <p>Determine the target platform's architecture and use rustup to add the corresponding target. For example, for ARMv7:</p>
+            <pre><code class="language-bash">rustup target add armv7-unknown-linux-gnueabihf</code></pre>
+        
+            <h3>Installing a Cross-Compiler</h3>
+            <p>Install the cross-compiler for your target platform. On Ubuntu, for ARMv7:</p>
+            <pre><code class="language-bash">sudo apt-get install gcc-arm-linux-gnueabihf</code></pre>
+        
+            <h3>Cargo Configuration</h3>
+            <p>Create a <code>.cargo/config</code> file in your project or home directory and specify the linker for your target:</p>
+            <pre><code>[target.armv7-unknown-linux-gnueabihf]
+        linker = "arm-linux-gnueabihf-gcc"</code></pre>
+        
+            <h3>Building the Project</h3>
+            <p>With the target added and cross-compiler configured, build your project for the target platform:</p>
+            <pre><code class="language-bash">cargo build --target=armv7-unknown-linux-gnueabihf</code></pre>
+        
+            <h3>Testing Cross-Compilation</h3>
+            <p>Transfer the compiled binary to the target device and run it. Ensure the device's OS and architecture match the target specified during compilation.</p>
+        
+            <p>Cross-compilation is essential for developing Rust applications that run on various platforms, especially in embedded systems, IoT, and when targeting operating systems different from your development machine.</p>
+        </section>
+        
+        <section id="rust-advanced-features" class="content-section">
+            <h2>Rust Advanced Features</h2>
+            
+            <h3>Lifetimes</h3>
+            <p>Lifetimes ensure that references are valid as long as necessary. They prevent dangling references.</p>
+            <pre><code class="language-rust">fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+            if x.len() > y.len() { x } else { y }
+        }</code></pre>
+        
+            <h3>Traits</h3>
+            <p>Traits define shared behavior. Trait bounds constrain generics to types with specific behaviors.</p>
+            <pre><code class="language-rust">trait Summary {
+            fn summarize(&self) -> String;
+        }</code></pre>
+        
+            <h3>Pattern Matching</h3>
+            <p>Match control flow operator allows pattern matching. Enums, literals, and structures can be destructured.</p>
+            <pre><code class="language-rust">match value {
+            Pattern => action,
+            _ => default_action,
+        }</code></pre>
+        
+            <h3>Type System Enhancements</h3>
+            <p>Rust's type system has features like type aliases, never type, and dynamic dispatch with trait objects.</p>
+            <pre><code class="language-rust">type Kilometers = i32;
+        let x: i32 = 5;
+        let y: Kilometers = 5;</code></pre>
+        
+            <h3>Concurrency</h3>
+            <p>Rust's ownership and type systems enable safe concurrency. Use <code>std::thread</code> for threads and <code>std::sync</code> for synchronization.</p>
+            <pre><code class="language-rust">use std::thread;
+        let handle = thread::spawn(|| {
+            // thread code
+        });
+        handle.join().unwrap();</code></pre>
+        
+            <h3>Unsafe Rust</h3>
+            <p>Unsafe Rust allows operations not checked by the compiler, such as dereferencing raw pointers and calling unsafe functions.</p>
+            <pre><code class="language-rust">unsafe {
+            // unsafe code
+        }</code></pre>
+        
+            <h3>Macros</h3>
+            <p>Macros allow writing code that writes other code (metaprogramming). They are expanded at compile time.</p>
+            <pre><code class="language-rust">macro_rules! my_macro {
+            () => {
+                println!("This is a macro!");
+            };
+        }</code></pre>
+        
+            <h3>Advanced Types</h3>
+            <p>Features like associated types, type placeholders, and newtype pattern for type safety and abstraction.</p>
+            <pre><code class="language-rust">struct Millimeters(u32);
+        struct Meters(u32);</code></pre>
+        
+            <h3>Advanced Lifetimes</h3>
+            <p>Complex lifetime scenarios with lifetime subtyping and lifetime bounds to ensure reference validity.</p>
+            <pre><code class="language-rust">'a: 'b // 'a lives at least as long as 'b</code></pre>
+        
+            <h3>Generics and Trait Bounds</h3>
+            <p>Generics abstract over types, and trait bounds specify constraints on generics.</p>
+            <pre><code class="language-rust">fn some_function<T: Display + Clone, U: Clone + Debug>(t: T, u: U) -> i32 {
+        }</code></pre>
+        
+            <p>These advanced features of Rust enable powerful, safe, and efficient systems programming. Mastery of these aspects allows developers to fully leverage Rust's capabilities.</p>
+        </section>
+        
+        
+        <section id="rust-performance-tuning" class="content-section">
+            <h2>Rust Performance Tuning</h2>
+            <p>Optimizing Rust applications involves understanding both the language's features and the underlying system's behavior. Here are key areas to focus on for performance tuning:</p>
+        
+            <h3>Use Release Builds</h3>
+            <p>Compile with <code>cargo build --release</code> to enable optimizations that are not present in debug builds.</p>
+        
+            <h3>Leverage Iterators</h3>
+            <p>Iterators in Rust are highly optimized. Use iterator methods like <code>map</code>, <code>filter</code>, and <code>fold</code> for better performance.</p>
+        
+            <h3>Minimize Allocations</h3>
+            <p>Heap allocations can be costly. Use stack allocations where possible and reuse allocations using structures like <code>Vec::with_capacity</code>.</p>
+        
+            <h3>Prefer Owned Types Over References</h3>
+            <p>Using owned types instead of references or borrowed types can reduce the overhead of borrowing checks and improve cache locality.</p>
+        
+            <h3>Optimize Data Structures</h3>
+            <p>Choose the most efficient data structure for your use case. Consider the use of <code>HashMap</code>, <code>BTreeMap</code>, arrays, and vectors based on their access patterns and memory usage.</p>
+        
+            <h3>Avoid Lock Contention</h3>
+            <p>In multithreaded applications, minimize the use of locks or use fine-grained locking to reduce contention.</p>
+        
+            <h3>Use Parallelism</h3>
+            <p>Leverage Rust's support for easy data parallelism with crates like <code>rayon</code> for tasks that can be performed in parallel.</p>
+        
+            <h3>Profile and Measure</h3>
+            <p>Use tools like <code>perf</code> (Linux), Instruments (macOS), or Visual Studio (Windows) to profile your application and identify bottlenecks.</p>
+        
+            <h3>Optimize Hot Paths</h3>
+            <p>Focus optimization efforts on hot paths—sections of code that are executed frequently or consume a significant amount of resources.</p>
+        
+            <h3>Use Compiler Lints</h3>
+            <p>Compiler lints like <code>clippy</code> can help identify potential code improvements and optimizations.</p>
+        
+            <p>Performance tuning in Rust is an iterative process. Start with profiling to identify bottlenecks, apply targeted optimizations, and measure the impact to ensure improved performance.</p>
+        </section>
+        
+        <!-- Add more sections as needed -->
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    font-family: "Ubuntu Mono", monospace;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+pre code.language-bash {
+    color: #ff6347;
+}
+
+pre code.language-rust {
+    color: #0fda71;
+}
+
+.sidebar {
+    /* background-color: #061728; */
+    background-color: #1d211d;
+    color: #45e0e8;
+    padding: 20px;
+    height: 100vh; /* Full height */
+    width: 200px; /* Sidebar width */
+    position: fixed;
+    overflow-y: auto; /* Enable scroll on Y axis if content is taller than screen */
+}
+
+#header{
+    color: #e8e8e8;
+}
+.code-snippet {
+    background-color: #ecc5c5;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.code-snippet pre {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.code-snippet code {
+    font-family: 'Courier New', Courier, monospace;
+    display: block;
+    padding: 15px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3;
+}
+
+.sidebar a {
+    color: #ddd;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+.content {
+    margin-left: 240px; /* Same as sidebar width */
+ 
+}
+
+h1, h2 {
+    color: #333;
+}
+
+p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+code {
+    background-color: #e8e8e8;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+/* Exercise Styles */
+#rust-collections .exercise-container {
+    margin-top: 20px;
+}
+
+#rust-collections input[type="text"] {
+    font-size: 16px;
+    padding: 8px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: 250px; /* Adjust width as needed */
+}
+
+#rust-collections button {
+    background-color: #10243b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#rust-collections button:hover {
+    background-color: #0056b3;
+}
+
+#rust-collections #feedback {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.content-section {
+    /* background-color: rgb(142, 241, 197); */
+    background-color: #cbcfd4;
+    font-family: "Ubuntu Mono", monospace;/* Change the font family */
+    color: #393f39; /* Set the text color to a darker shade for better readability */
+    line-height: 1.6; /* Increase line height for better readability */
+    padding: 20px; /* Add some padding around the content */
+}
+
+.content-section {
+    display: none; /* Hide all sections by default */
+}
+nav ul li {
+    border-bottom: 1px solid #fff; /* Adds a white line below each list item */
+    margin-bottom: 8px; /* Optional: adds some space below the line for better visual separation */
+}
+
+nav ul li:last-child {
+    border-bottom: none; /* Removes the border from the last item to avoid a trailing line */
+}
+
+.content-section.active {
+    display: block; /* Only show the active section */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative; /* Change to flow in document */
+    }
+    .content {
+        margin-left: 0; /* Remove margin for content */
+    }
+    .sidebar a {
+        display: inline-block; /* Adjust links for horizontal layout */
+        margin: 10px 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar a {
+        padding: 8px;
+        font-size: 14px; /* Make text smaller to fit more items */
+    }
+}
