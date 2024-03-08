@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Rust - Blockchain Course</title>
+    <link rel="stylesheet" href="rust-course.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><h2 id="header" >Rust Tutorial</h2></li>
+                <li><a href="#what-is-rust" class="nav-link" data-target="what-is-rust">What is Rust?</a></li>
+                <li><a href="#why-rust" class="nav-link" data-target="why-rust">Why Rust?</a></li>
+                <li><a href="#getting-started-with-rust" class="nav-link" data-target="getting-started-with-rust">Getting Started with Rust</a></li>
+                <li><a href="#functions-in-rust" class="nav-link" data-target="functions-in-rust">Functions in Rust</a></li>
+                <li><a href="#understanding-ownership" class="nav-link" data-target="understanding-ownership">Understanding Ownership</a></li>
+                <li><a href="#rust-control-flow" class="nav-link" data-target="rust-control-flow">Control Flow in Rust</a></li>
+                Add more sections as needed -->
+            <!-- </ul>
+        </nav>
+    </aside> -->
+  
+    <aside class="sidebar" id="sidebar">
+        <nav>
+            <ul>
+                <li><h2 id="header">10-days-of-Rust</h2></li>
+
+                <ul>
+                    <li> <a href="#Hello" class="nav-link">Hello World</a></li>
+                    <li><a href="#Game"class="nav-link">Guessing Game</a></li>
+                    <li><a href="#Calculator"class="nav-link">Command Line Calculator </a> </li>
+                    <li> <a href="#todo"class="nav-link">To-do List</a></li>
+                    <li> <a href="#Scraper"class="nav-link">Web Scraper</a></li>
+                    <li><a href="#Blog"class="nav-link">Static Blog Generator</a> </li>
+                    <li><a href="#HTTP"class="nav-link">HTTP Server</a></li>
+                    <li><a href="#Chat"class="nav-link">Chat Application</a></li>
+                    <li><a href="#Spider"class="nav-link">Concurrent Web Spide</a> </li>
+                    <li> <a href="#Blockchain"class="nav-link">Build a Blockchain </a> </li>
+                </ul>
+                <!-- <li><a href="#rust-introduction" class="nav-link">Rust Introduction</a></li>
+                <li><a href="#rust-installation" class="nav-link">Rust Installation</a></li>
+                <li><a href="#hello-world" class="nav-link">Hello World</a></li>
+                <li><a href="#rust-primitives"class="nav-link">Data Types & Primitives</a></li> -->
+      
+        </nav>
+    </aside>
+    
+    
+    <main class="content">
+        <section id="Hello" class="content-section active">
+            <h2>Introduction to Rust with "Hello, World!"</h2>
+            <p>Starting with Rust, we begin with the traditional "Hello, World!" program. This example serves as an introduction to compiling and running Rust code, highlighting its syntax and basic file structure.</p>
+        
+            <h3>Setup Rust Environment</h3>
+            <p>Ensure Rust is installed by running <code>rustc --version</code> in your terminal. If Rust is not installed, visit the official Rust website for installation instructions.</p>
+        
+            <h3>Writing "Hello, World!"</h3>
+            <p>Create a file named <code>main.rs</code> with the following Rust code. This code defines a main function that prints "Hello, World!" to the console.</p>
+            <pre><code class="language-rust">// main.rs
+        fn main() {
+            println!("Hello, world!");
+        }</code></pre>
+        
+            <h3>Compiling and Running the Program</h3>
+            <p>Compile the Rust program using <code>rustc main.rs</code>. This command generates an executable named <code>main</code> (or <code>main.exe</code> on Windows).</p>
+            <p>Run the executable with <code>./main</code> on Unix-like systems or <code>main.exe</code> on Windows. The output will display "Hello, World!" in the terminal.</p>
+        
+            <h3>Understanding the Code</h3>
+            <p>The <code>fn</code> keyword defines a new function named <code>main</code>. This function is the entry point of many Rust programs. The <code>println!</code> macro prints the specified message to the console.</p>
+        
+            <h3>Next Steps in Rust</h3>
+            <p>After mastering "Hello, World!", consider exploring Rust's ownership model, data types, control flow, and use of external crates to expand your Rust programming skills. The Rust documentation and online community provide extensive resources for learning and problem-solving.</p>
+        </section>
+        <section id="Game" class="content-section">
+            <h2>Rust Project: Building a Guessing Game</h2>
+            <p>This project involves creating a simple guessing game where the user attempts to guess a randomly generated number within a certain range. The game provides feedback on each guess, indicating whether the guess is too high, too low, or correct.</p>
+        
+            <h3>Setup and User Input</h3>
+            <p>Create a new Rust project with Cargo, Rust's package manager and build system:</p>
+            <pre><code class="language-shell">cargo new guessing_game
+        cd guessing_game</code></pre>
+            <p>Edit the <code>main.rs</code> file in the <code>src</code> directory to start coding your game. First, include the necessary libraries for generating random numbers and handling user input:</p>
+            <pre><code class="language-rust">use std::io;
+        use rand::Rng;
+        use std::cmp::Ordering;</code></pre>
+            <p>Next, add the game logic to generate a secret number and allow the user to guess it in a loop until they get it right:</p>
+            <pre><code class="language-rust">fn main() {
+            println!("Guess the number!");
+        
+            let secret_number = rand::thread_rng().gen_range(1..101);
+        
+            loop {
+                println!("Please input your guess.");
+        
+                let mut guess = String::new();
+                io::stdin()
+                    .read_line(&mut guess)
+                    .expect("Failed to read line");
+        
+                let guess: u32 = match guess.trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => continue,
+                };
+        
+                println!("You guessed: {}", guess);
+        
+                match guess.cmp(&secret_number) {
+                    Ordering::Less => println!("Too small!"),
+                    Ordering::Greater => println!("Too big!"),
+                    Ordering::Equal => {
+                        println!("You win!");
+                        break;
+                    }
+                }
+            }
+        }</code></pre>
+            <p>This code does several things:</p>
+            <ul>
+                <li>Generates a secret number between 1 and 100.</li>
+                <li>Prompts the user to input their guess.</li>
+                <li>Reads the user's input and converts it to an unsigned 32-bit integer.</li>
+                <li>Compares the guess to the secret number and provides feedback.</li>
+                <li>Repeats this process until the user guesses correctly.</li>
+            </ul>
+            <h3>Running Your Game</h3>
+            <p>After saving your changes, run the game using Cargo:</p>
+            <pre><code class="language-shell">cargo run</code></pre>
+            <p>Follow the on-screen prompts to guess the randomly generated number. The game will inform you if your guess is too high, too low, or correct. Enjoy the game and experiment with the code to make it your own!</p>
+        </section>
+        <section id="Calculator" class="content-section">
+            <h2>Building a Command Line Calculator in Rust</h2>
+            <p>This project guides you through creating a basic command-line calculator. The calculator will be able to perform four arithmetic operations: addition, subtraction, multiplication, and division.</p>
+        
+            <h3>Setting Up the Project</h3>
+            <p>Create a new Rust project named <code>calc</code> by running the following command in your terminal:</p>
+            <pre><code class="language-shell">cargo new calc</code></pre>
+            <p>This command generates a new folder named <code>calc</code> containing the basic Rust project structure.</p>
+        
+            <h3>Writing the Calculator Code</h3>
+            <p>Navigate into your project directory:</p>
+            <pre><code class="language-shell">cd calc</code></pre>
+            <p>Edit the <code>main.rs</code> file located in the <code>src</code> directory. Replace its contents with the following Rust code:</p>
+            <pre><code class="language-rust">use std::env;
+        use std::process;
+        
+        fn main() {
+            let args: Vec&lt;String&gt; = env::args().collect();
+            
+            if args.len() != 4 {
+                eprintln!("Usage: calc [num1] [operator] [num2]");
+                process::exit(1);
+            }
+        
+            let num1: f64 = args[1].parse().expect("First argument is not a number");
+            let operator = &args[2];
+            let num2: f64 = args[3].parse().expect("Third argument is not a number");
+        
+            match operator.as_str() {
+                "+" =&gt; println!("Result: {}", num1 + num2),
+                "-" =&gt; println!("Result: {}", num1 - num2),
+                "*" =&gt; println!("Result: {}", num1 * num2),
+                "/" =&gt; println!("Result: {}", num1 / num2),
+                _ =&gt; {
+                    eprintln!("Invalid operator. Please use +, -, *, or /.");
+                    process::exit(1);
+                }
+            }
+        }</code></pre>
+        
+            <h3>Understanding the Code</h3>
+            <p>The program starts by collecting the command line arguments into a vector named <code>args</code>. It expects three arguments: two numbers and an operator.</p>
+            <p>It then checks if the correct number of arguments are provided. If not, it displays a usage message and exits.</p>
+            <p>The numbers are parsed from the command line arguments and stored in <code>num1</code> and <code>num2</code> as floating-point numbers to allow for decimal calculations. The program exits if the parsing fails, indicating the input was not a valid number.</p>
+            <p>The <code>match</code> statement is used to determine which arithmetic operation to perform based on the operator argument. It outputs the result of the operation or exits if an invalid operator is provided.</p>
+        
+            <h3>Compiling and Running the Program</h3>
+            <p>To compile and run the calculator, use the following commands:</p>
+            <pre><code class="language-shell">cargo build
+        cargo run -- 5 + 3</code></pre>
+            <p>Replace <code>5</code>, <code>+</code>, and <code>3</code> with any numbers and operators you wish to calculate. The program will output the result of the operation.</p>
+        </section>
+        <section id="todo" class="content-section">
+            <h2>Rust To-do List CLI</h2>
+            <p>Build a basic command-line to-do list application using Rust. This project will introduce you to file I/O, command-line argument parsing, and basic data manipulation in Rust.</p>
+        
+            <h3>Project Setup</h3>
+            <p>Start by creating a new Rust project:</p>
+            <pre><code class="language-shell">cargo new todo_cli</code></pre>
+            <p>Move into your project directory:</p>
+            <pre><code class="language-shell">cd todo_cli</code></pre>
+        
+            <h3>Defining the Task Structure</h3>
+            <p>Create a new Rust file <code>task.rs</code> in the <code>src</code> directory. Define the Task struct:</p>
+            <pre><code class="language-rust">struct Task {
+            id: u32,
+            content: String,
+            completed: bool,
+        }</code></pre>
+            <p>This struct represents a single to-do item. Each task has an ID, content, and a completion status.</p>
+        
+            <h3>Reading and Writing Tasks</h3>
+            <p>Implement functions to read and write tasks to a file. Use Rust's file I/O capabilities:</p>
+            <pre><code class="language-rust">// Save tasks to a file
+        fn save_tasks(tasks: &Vec<Task>) -> Result<(), std::io::Error> {
+            let serialized = serde_json::to_string(&tasks)?;
+            std::fs::write("tasks.json", serialized)
+        }
+        
+        // Load tasks from a file
+        fn load_tasks() -> Result<Vec<Task>, std::io::Error> {
+            let data = std::fs::read_to_string("tasks.json")?;
+            let tasks = serde_json::from_str(&data)?;
+            Ok(tasks)
+        }</code></pre>
+            <p>These functions serialize tasks to JSON and deserialize them from JSON, using the <code>serde</code> crate for serialization. Add <code>serde</code> and <code>serde_json</code> to your <code>Cargo.toml</code> dependencies.</p>
+        
+            <h3>Manipulating Tasks</h3>
+            <p>Create functions to add, complete, and list tasks. For example, to add a task:</p>
+            <pre><code class="language-rust">fn add_task(tasks: &mut Vec<Task>, content: String) {
+            let new_task = Task {
+                id: tasks.len() as u32 + 1,
+                content,
+                completed: false,
+            };
+            tasks.push(new_task);
+        }</code></pre>
+            <p>Use similar logic to implement functions for completing and listing tasks based on the <code>Task</code> struct and the file I/O functions you've defined.</p>
+        
+            <h3>CLI Integration</h3>
+            <p>Finally, integrate command-line argument parsing to interact with your to-do list from the terminal. Utilize the <code>clap</code> crate for parsing CLI arguments. Here's a simple setup to add a task:</p>
+            <pre><code class="language-rust">use clap::{App, Arg};
+        
+        fn main() {
+            let matches = App::new("ToDo CLI")
+                .version("1.0")
+                .author("Your Name")
+                .about("Manage your tasks")
+                .arg(Arg::with_name("add")
+                    .short("a")
+                    .long("add")
+                    .value_name("TASK")
+                    .help("Adds a task to your to-do list")
+                    .takes_value(true))
+                .get_matches();
+        
+            if let Some(task) = matches.value_of("add") {
+                // Add task logic here
+            }
+        }</code></pre>
+            <p>This snippet shows how to set up a command-line argument for adding a task. Expand this setup to include options for completing and listing tasks.</p>
+        </section>
+        <section id="Scraper" class="content-section">
+            <h2>Building a Web Scraper with Rust</h2>
+            <p>This project guides you through creating a basic web scraper in Rust. You'll scrape data from a website and print it to the console. For this example, we'll scrape quotes from a hypothetical website.</p>
+            
+            <h3>Setting Up Your Project</h3>
+            <p>Start by creating a new Rust project:</p>
+            <pre><code class="language-shell">cargo new rust_web_scraper</code></pre>
+            <p>Change into your project directory:</p>
+            <pre><code class="language-shell">cd rust_web_scraper</code></pre>
+            
+            <h3>Adding Dependencies</h3>
+            <p>Add the following dependencies to your <code>Cargo.toml</code> file for making HTTP requests and parsing HTML:</p>
+            <pre><code class="language-toml">[dependencies]
+        reqwest = "0.11"
+        tokio = { version = "1", features = ["full"] }
+        scraper = "0.12"</code></pre>
+        
+            <h3>Writing the Scraper</h3>
+            <p>In your <code>main.rs</code>, replace the contents with the following code:</p>
+            <pre><code class="language-rust">use reqwest::Error;
+        use scraper::{Html, Selector};
+        
+        #[tokio::main]
+        async fn main() -> Result<(), Error> {
+            let body = reqwest::get("https://example.com/quotes").await?.text().await?;
+            let fragment = Html::parse_document(&body);
+            let quotes = Selector::parse(".quote").unwrap();
+        
+            for quote in fragment.select(&quotes) {
+                let quote_text = quote.text().collect::<Vec<_>>().join(" ");
+                println!("{}", quote_text);
+            }
+        
+            Ok(())
+        }</code></pre>
+            <p>Here's a breakdown of the code:</p>
+            <ul>
+                <li>The <code>reqwest</code> and <code>scraper</code> crates are used for making HTTP requests and parsing HTML, respectively.</li>
+                <li>The <code>#[tokio::main]</code> attribute marks the entry point for our asynchronous application.</li>
+                <li>We send a GET request to "<code>https://example.com/quotes</code>" and await the response.</li>
+                <li>The HTML is parsed, and a <code>Selector</code> for elements with the class "quote" is created.</li>
+                <li>We iterate over each element that matches the selector, extract its text, and print it.</li>
+            </ul>
+        
+            <h3>Running Your Web Scraper</h3>
+            <p>To run your web scraper, use the following command:</p>
+            <pre><code class="language-shell">cargo run</code></pre>
+            <p>If the website at "<code>https://example.com/quotes</code>" contains quotes within elements having the class "quote", your program will print these quotes to the console.</p>
+        </section>
+        
+        <section id="Blog" class="content-section">
+            <h2>Build a Static Blog Generator with Rust</h2>
+            <p>This project guides you through creating a static blog generator. This tool converts markdown files into HTML to host a blog statically. You'll learn file reading, parsing markdown, and generating HTML.</p>
+        
+            <h3>Setup and Dependencies</h3>
+            <p>Start by creating a new Rust project:</p>
+            <pre><code class="language-shell">cargo new static_blog_generator
+        cd static_blog_generator</code></pre>
+            <p>Add the `pulldown-cmark` and `serde` crates to your `Cargo.toml` for markdown parsing and templating:</p>
+            <pre><code class="language-toml">[dependencies]
+        pulldown-cmark = "0.9"
+        serde = { version = "1.0", features = ["derive"] }</code></pre>
+        
+            <h3>Reading and Parsing Markdown</h3>
+            <p>Define a function to read markdown files and convert them to HTML. Use the `pulldown-cmark` crate for parsing:</p>
+            <pre><code class="language-rust">use pulldown_cmark::{html, Parser};
+        
+        fn markdown_to_html(markdown_input: &str) -> String {
+            let parser = Parser::new(markdown_input);
+            let mut html_output = String::new();
+            html::push_html(&mut html_output, parser);
+            html_output
+        }</code></pre>
+        
+            <h3>Generating the Blog Post</h3>
+            <p>Create a function to apply the markdown content to an HTML template. This function generates the final HTML file for each blog post:</p>
+            <pre><code class="language-rust">fn generate_blog_post(title: &str, content: &str) -> String {
+            format!("&lt;!DOCTYPE html&gt;
+        &lt;html lang='en'&gt;
+        &lt;head&gt;
+            &lt;meta charset='UTF-8'&gt;
+            &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;
+            &lt;title&gt;{}&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;article&gt;{}&lt;/article&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;", title, markdown_to_html(content))
+        }</code></pre>
+        
+            <h3>Putting It All Together</h3>
+            <p>To generate your blog, read markdown files from a directory, convert them with `markdown_to_html`, and write the output to HTML files. This can be part of your `main` function:</p>
+            <pre><code class="language-rust">// Main function to read, convert, and generate blog posts
+        fn main() {
+            let markdown_content = "Your markdown content here...";
+            let title = "Your Blog Post Title";
+            let html_content = generate_blog_post(title, &markdown_content);
+            
+            // Code to write `html_content` to an HTML file goes here
+        }</code></pre>
+            <p>This project demonstrates reading files, parsing markdown, and generating HTML with Rust, providing a practical application of Rust's file I/O and string manipulation capabilities.</p>
+        </section>
+        
+        <section id="HTTP" class="content-section">
+            <h2>Building a Simple HTTP Server in Rust</h2>
+            <p>This tutorial will guide you through creating a basic HTTP server in Rust using the <code>hyper</code> crate.</p>
+        
+            <h3>Setting Up Your Project</h3>
+            <p>Start by creating a new Rust project with Cargo:</p>
+            <pre><code class="language-shell">cargo new http_server
+        cd http_server</code></pre>
+        
+            <p>Add <code>hyper</code> and <code>tokio</code> as dependencies in your <code>Cargo.toml</code> file:</p>
+            <pre><code class="language-toml">[dependencies]
+        hyper = "0.14"
+        tokio = { version = "1", features = ["full"] }</code></pre>
+        
+            <h3>Writing the Server Code</h3>
+            <p>Open the <code>main.rs</code> file in your project and replace its contents with the following code:</p>
+            <pre><code class="language-rust">use hyper::{Body, Request, Response, Server};
+        use hyper::service::{make_service_fn, service_fn};
+        use hyper::http::StatusCode;
+        use std::convert::Infallible;
+        
+        async fn handle_request(_req: Request&lt;Body&gt;) -> Result&lt;Response&lt;Body&gt;, Infallible&gt; {
+            Ok(Response::builder()
+                .status(StatusCode::OK)
+                .body(Body::from("Hello, World!"))
+                .unwrap())
+        }
+        
+        #[tokio::main]
+        async fn main() {
+            let addr = ([127, 0, 0, 1], 3000).into();
+        
+            let service = make_service_fn(|_| async {
+                Ok::<_, Infallible>(service_fn(handle_request))
+            });
+        
+            let server = Server::bind(&addr).serve(service);
+        
+            if let Err(e) = server.await {
+                eprintln!("server error: {}", e);
+            }
+        }</code></pre>
+        
+            <h3>Understanding the Code</h3>
+            <p>The code snippet above demonstrates setting up a basic HTTP server that responds with "Hello, World!" to all requests. Here's a breakdown of its key components:</p>
+            <ul>
+                <li><strong>hyper crate:</strong> Used for creating HTTP servers and clients.</li>
+                <li><strong>tokio:</strong> An asynchronous runtime required by <code>hyper</code> for non-blocking I/O operations.</li>
+                <li>The <code>handle_request</code> function asynchronously processes each incoming HTTP request and returns a simple "Hello, World!" response.</li>
+                <li>The <code>#[tokio::main]</code> attribute transforms the <code>main</code> function into an asynchronous entry point of the application.</li>
+                <li>The server is bound to localhost on port 3000, awaiting and handling incoming requests.</li>
+            </ul>
+        
+            <h3>Running Your Server</h3>
+            <p>With the server code in place, run your server using Cargo:</p>
+            <pre><code class="language-shell">cargo run</code></pre>
+            <p>Now, your server is listening on <code>http://127.0.0.1:3000</code>. Access this URL in a web browser or use a tool like <code>curl</code> to see the "Hello, World!" response:</p>
+            <pre><code class="language-shell">curl http://127.0.0.1:3000</code></pre>
+        
+            <h3>Final Points:</h3>
+            <p>By following these steps, you've successfully created a basic HTTP server in Rust that responds with "Hello, World!" to all requests. This example introduces you to asynchronous programming in Rust and the basics of handling HTTP requests with the <code>hyper</code> crate.</p>
+        </section>
+        
+        <section id="Chat" class="content-section">
+            <h2>Building a Simple Chat Application in Rust</h2>
+            <p>This section guides you through creating a basic chat application using Rust and WebSockets. The application will allow multiple clients to connect to a Rust-powered server to send and receive messages in real-time.</p>
+        
+            <h3>Setting Up the Project</h3>
+            <p>Start by creating a new Rust project:</p>
+            <pre><code class="language-shell">cargo new rust_chat --bin</code></pre>
+            <p>Navigate into your project directory:</p>
+            <pre><code class="language-shell">cd rust_chat</code></pre>
+        
+            <h3>Adding Dependencies</h3>
+            <p>Add the following to your <code>Cargo.toml</code> file to include WebSocket and async support:</p>
+            <pre><code class="language-toml">[dependencies]
+        tokio = { version = "1.0", features = ["full"] }
+        tungstenite = "0.11"</code></pre>
+        
+            <h3>Creating the Server</h3>
+            <p>Edit <code>src/main.rs</code> to set up a WebSocket server:</p>
+            <pre><code class="language-rust">use tokio::net::TcpListener;
+        use tokio::stream::StreamExt;
+        use tungstenite::protocol::Message;
+        
+        #[tokio::main]
+        async fn main() {
+            let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
+            println!("Server listening on port 8080");
+        
+            listener.incoming().for_each_concurrent(None, |stream| async move {
+                let stream = stream.unwrap();
+                let addr = stream.peer_addr().unwrap();
+                println!("Connection established: {}", addr);
+        
+                let mut websocket = tokio_tungstenite::accept_async(stream).await.unwrap();
+                
+                while let Some(msg) = websocket.next().await {
+                    match msg {
+                        Ok(message) => {
+                            if message.is_text() || message.is_binary() {
+                                websocket.send(message).await.unwrap();
+                            }
+                        }
+                        Err(e) => {
+                            println!("Error: {}", e);
+                            break;
+                        }
+                    }
+                }
+            }).await;
+        }</code></pre>
+            <p>This server listens for incoming connections and echoes back any messages it receives.</p>
+        
+            <h3>Testing the Server</h3>
+            <p>Run your server:</p>
+            <pre><code class="language-shell">cargo run</code></pre>
+            <p>Test the WebSocket server using a WebSocket client tool or a custom client script. Connect to <code>ws://127.0.0.1:8080</code> and start sending messages.</p>
+        
+            <h3>Final Point:</h3>
+            <p>You've now created a simple Rust chat server that accepts connections and echoes messages. This example demonstrates basic networking and asynchronous programming in Rust. To extend this application, consider implementing features like message broadcasting to multiple clients, user authentication, or secure WebSocket connections (wss).</p>
+        </section>
+        <section id="Spider" class="content-section">
+            <h2>Building a Concurrent Web Spider in Rust</h2>
+            <p>This project demonstrates how to build a basic concurrent web spider using Rust. You'll learn to request web pages and process them in parallel, leveraging Rust's powerful concurrency features for efficient web crawling.</p>
+        
+            <h3>Setting Up</h3>
+            <p>First, add the necessary dependencies to your <code>Cargo.toml</code> file:</p>
+            <pre><code class="language-toml">[dependencies]
+        tokio = { version = "1.0", features = ["full"] }
+        reqwest = "0.11"
+        futures = "0.3"
+        html5ever = "0.25"
+        </code></pre>
+            <p>This includes <code>tokio</code> for asynchronous runtime, <code>reqwest</code> for making HTTP requests, <code>futures</code> for handling asynchronous computations, and <code>html5ever</code> for parsing HTML.</p>
+        
+            <h3>Creating the Main Function</h3>
+            <p>Start by setting up an asynchronous main function using Tokio:</p>
+            <pre><code class="language-rust">#[tokio::main]
+        async fn main() {
+            // Future implementation will go here
+        }
+        </code></pre>
+        
+            <h3>Fetching a Web Page</h3>
+            <p>To fetch a web page, use the <code>reqwest</code> crate. Here's a function that makes an HTTP GET request:</p>
+            <pre><code class="language-rust">async fn fetch_url(url: &str) -> Result<String, reqwest::Error> {
+            let response = reqwest::get(url).await?;
+            let body = response.text().await?;
+            Ok(body)
+        }
+        </code></pre>
+            <p>This function asynchronously fetches the contents of a URL and returns the HTML as a string.</p>
+        
+            <h3>Processing HTML Content</h3>
+            <p>After fetching the page, you can parse the HTML to extract links or other information. This step can vary greatly depending on your goals. As an example, here's a simplistic way to count words in the fetched HTML:</p>
+            <pre><code class="language-rust">fn count_words(html: &str) -> usize {
+            html.split_whitespace().count()
+        }
+        </code></pre>
+        
+            <h3>Concurrently Fetching Multiple URLs</h3>
+            <p>Use <code>tokio</code>'s concurrency features to fetch multiple URLs in parallel. Here's an example that fetches a list of URLs and processes them concurrently:</p>
+            <pre><code class="language-rust">async fn fetch_and_process(urls: Vec<&str>) {
+            let fetches = urls.into_iter().map(|url| {
+                async move {
+                    let html = fetch_url(url).await.unwrap();
+                    let word_count = count_words(&html);
+                    println!("{} has {} words.", url, word_count);
+                }
+            });
+            futures::future::join_all(fetches).await;
+        }
+        </code></pre>
+            <p>This function demonstrates basic concurrency in Rust by fetching and processing HTML content from multiple URLs in parallel, printing the word count for each URL.</p>
+        
+            <h3>Final Point:</h3>
+            <p>This section provided a foundation for building a concurrent web spider in Rust. By leveraging async/await syntax and Tokio's powerful concurrency model, you can efficiently process multiple web requests in parallel. For more advanced web crawling, consider handling errors more gracefully, respecting robots.txt, and following links to crawl entire websites.</p>
+        </section>
+        <section id="Blockchain" class="content-section">
+            <h2>Blockchain Simulator in Rust</h2>
+            <p>Creating a blockchain simulator will help understand the principles of blockchain technology, such as creating blocks, hashing, and the chain's immutability. This project uses Rust for its performance and safety features.</p>
+        
+            <h3>Setting Up the Project</h3>
+            <p>Start by creating a new Rust project:</p>
+            <pre><code class="language-shell">cargo new blockchain_simulator
+        cd blockchain_simulator</code></pre>
+        
+            <h3>Defining a Block</h3>
+            <p>Each block in a blockchain contains data, a hash of the block, and the hash of the previous block. This creates the chain. First, define the structure of a block.</p>
+            <pre><code class="language-rust">#[derive(Debug)]
+        struct Block {
+            data: String,
+            hash: String,
+            prev_hash: String,
+        }</code></pre>
+        
+            <h3>Creating the Genesis Block</h3>
+            <p>The genesis block is the first block in the blockchain, with no preceding block. Here’s how to create it:</p>
+            <pre><code class="language-rust">impl Block {
+            fn new(data: String, prev_hash: String) -> Self {
+                let hash = Self::hash(&data, &prev_hash);
+                Block { data, hash, prev_hash }
+            }
+        
+            fn genesis() -> Self {
+                Block::new("Genesis block".to_string(), "".to_string())
+            }
+        
+            fn hash(data: &str, prev_hash: &str) -> String {
+                // Simplified hashing using data and prev_hash
+                format!("{}{}", data, prev_hash)
+            }
+        }</code></pre>
+        
+            <h3>Adding Blocks to the Chain</h3>
+            <p>To add blocks to the chain, maintain a vector of blocks. Each new block’s `prev_hash` will be the hash of the last block in the chain.</p>
+            <pre><code class="language-rust">struct Blockchain {
+            chain: Vec<Block>,
+        }
+        
+        impl Blockchain {
+            fn new() -> Self {
+                let genesis = Block::genesis();
+                Blockchain { chain: vec![genesis] }
+            }
+        
+            fn add_block(&mut self, data: String) {
+                let prev_hash = self.chain.last().unwrap().hash.clone();
+                let new_block = Block::new(data, prev_hash);
+                self.chain.push(new_block);
+            }
+        }</code></pre>
+        
+            <h3>Testing Your Blockchain</h3>
+            <p>Finally, test the blockchain by adding some blocks and printing the chain.</p>
+            <pre><code class="language-rust">fn main() {
+            let mut blockchain = Blockchain::new();
+        
+            blockchain.add_block("Block 1 Data".to_string());
+            blockchain.add_block("Block 2 Data".to_string());
+        
+            for block in blockchain.chain {
+                println!("{:?}", block);
+            }
+        }</code></pre>
+        
+            <p>This simple simulator introduces the core concepts of blockchain. For a real-world application, you'd include cryptographic hashing and more complex data structures.</p>
+        </section>
+        
+        <!-- Add more sections as needed -->
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
