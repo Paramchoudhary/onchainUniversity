@@ -2,6 +2,7 @@ body, h1, h2, p, ul, li, a {
     margin: 0;
     padding: 0;
     font-family: "Ubuntu Mono", monospace;
+    
 }
 
 a {
@@ -28,7 +29,15 @@ pre code.language-rust {
 }
 
 #header{
-    color: #22ed1fb4;
+   
+    background: linear-gradient(90deg, #12C2E9 0%, #c471ed 50%, #f64f59 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+#onchain-university{
+    background: linear-gradient(90deg, #12C2E9 0%, #c471ed 50%, #f64f59 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 .code-snippet {
     background-color: #ecc5c5;
